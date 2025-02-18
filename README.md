@@ -11,3 +11,10 @@ sudo apt íntall openssh-server -y
 
 -> sudo apt purge openssh-client 
 -> sudo apt íntall openssh-server -y
+
+test SSH:
+-> sudo systemctl status ssh
+
+if ssh is not enabled
+-> sudo systemctl restart ssh
+
