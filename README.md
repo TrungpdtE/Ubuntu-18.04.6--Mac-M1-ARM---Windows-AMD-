@@ -1,4 +1,6 @@
 # Ubuntu-18.04.6-Mac-M1
+1.Install Ubutu 18.04.6 ARM64 ios file
+2. 
 
 
 
