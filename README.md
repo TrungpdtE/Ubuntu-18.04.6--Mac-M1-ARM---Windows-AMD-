@@ -25,12 +25,16 @@ Set up your CPU & Memory
 
 step2. Link the USB to Ubuntu
 # Click Devices -> USB & Bluetooth -> USB Connection Preferences
+
 <img width="871" alt="Ảnh màn hình 2025-02-21 lúc 00 15 20" src="https://github.com/user-attachments/assets/c9ddb276-094d-4c0b-bca7-3f7fb8b74a36" />
+
 # Click "+", then link the USB
+
 <img width="870" alt="Ảnh màn hình 2025-02-21 lúc 00 20 08" src="https://github.com/user-attachments/assets/77de390b-2449-4bc5-b835-63db8b33880c" />
 <img width="1019" alt="Ảnh màn hình 2025-02-21 lúc 00 20 22" src="https://github.com/user-attachments/assets/29eab329-2fb5-4e6e-824f-17421bc83460" />
 
 step3.
+
 <img width="1024" alt="Ảnh màn hình 2025-02-21 lúc 00 16 10" src="https://github.com/user-attachments/assets/63b8da92-aa6e-408b-8509-b639f08b86f6" />
 <img width="1024" alt="Ảnh màn hình 2025-02-21 lúc 00 16 19" src="https://github.com/user-attachments/assets/d8edc1c6-0d80-4d73-b764-a0387de42bea" />
 <img width="1024" alt="Ảnh màn hình 2025-02-21 lúc 00 16 23" src="https://github.com/user-attachments/assets/f90a468e-19b8-41e9-b899-b185d030de1a" />
@@ -47,26 +51,32 @@ step3.
 <img width="1019" alt="Ảnh màn hình 2025-02-21 lúc 00 34 33" src="https://github.com/user-attachments/assets/d75889a6-8bd7-43ff-b012-9425cf502196" />
 <img width="1019" alt="Ảnh màn hình 2025-02-21 lúc 00 34 48" src="https://github.com/user-attachments/assets/53b0518b-8a9e-47a8-b9d7-bb0e8d236b22" />
 <img width="1019" alt="Ảnh màn hình 2025-02-21 lúc 00 36 33" src="https://github.com/user-attachments/assets/2f3cab7f-04a8-4ac8-9d0a-d33f43630593" />
+
 => DONE
+
 <img width="1019" alt="Ảnh màn hình 2025-02-21 lúc 00 36 42" src="https://github.com/user-attachments/assets/09263a8f-75b2-4a86-a614-a2cffb01db3c" />
 
 Step4. Login
 Enter your username
+
 <img width="1025" alt="Ảnh màn hình 2025-02-21 lúc 00 38 40" src="https://github.com/user-attachments/assets/d91f3475-e62a-4bd5-9c6d-33b5e9c8aec7" />
+
 Enter your password
+
 <img width="1025" alt="Ảnh màn hình 2025-02-21 lúc 00 38 50" src="https://github.com/user-attachments/assets/3c8384e1-6ae2-47bf-965a-298cd009248f" />
 
 Step5. Install Gnome Desktop
-> sudo apt update
+
+>     sudo apt update
 <img width="1025" alt="Ảnh màn hình 2025-02-21 lúc 00 39 13" src="https://github.com/user-attachments/assets/98c444af-9aa3-4a3c-85d4-1159480228e1" />
 
-> sudo apt install ubuntu-gnome-desktop
+>     sudo apt install ubuntu-gnome-desktop
 <img width="1025" alt="Ảnh màn hình 2025-02-21 lúc 00 39 25" src="https://github.com/user-attachments/assets/fbdd72bc-34d0-4e31-9842-9a5635daa895" />
 
 <img width="1025" alt="Ảnh màn hình 2025-02-21 lúc 00 54 10" src="https://github.com/user-attachments/assets/e3ef2e48-ae56-442f-938f-797693d4f835" />
 
 Now, you should reboot the system
-> Sudo apt reboot
+>     sudo apt reboot
 <img width="1025" alt="Ảnh màn hình 2025-02-21 lúc 00 56 31" src="https://github.com/user-attachments/assets/dfb64d94-5f91-4e7c-b9c2-caa7db67f320" />
 
 If you still enter the terminal after rebooting, run:
