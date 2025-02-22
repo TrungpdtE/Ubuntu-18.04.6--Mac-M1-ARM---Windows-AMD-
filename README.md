@@ -70,51 +70,51 @@ Now, you should reboot the system
 <img width="1025" alt="Ảnh màn hình 2025-02-21 lúc 00 56 31" src="https://github.com/user-attachments/assets/dfb64d94-5f91-4e7c-b9c2-caa7db67f320" />
 
 If you still enter the terminal after rebooting, run:
-> sudo systemctl set-default graphical.target
-> sudo reboot
+>      sudo systemctl set-default graphical.target
+>      sudo reboot
 
 # Install SSH
 
-sudo apt íntall openssh-server -y
+>     sudo apt íntall openssh-server -y
 
 ! openssh-server (>= 1:7.6p1-4) but it is not going to be installed 
 
--> sudo apt purge openssh-client 
--> sudo apt íntall openssh-server -y
+>     sudo apt purge openssh-client 
+>     sudo apt íntall openssh-server -y
 
 test SSH:
--> sudo systemctl status ssh
+>     sudo systemctl status ssh
 
 if ssh is not enabled
--> sudo systemctl restart ssh
+>     sudo systemctl restart ssh
 
 # Set up Hadoop
 
 1. Install Java 8 (highly recommended)
 
-> sudo apt install openjdk-8-jre-headless
-> sudo apt install openjdk-8-jdk-headless
+>     sudo apt install openjdk-8-jre-headless
+>     sudo apt install openjdk-8-jdk-headless
 
 2. Install ssh and pdsh
 
-> sudo apt install ssh
-> sudo apt install pdsh
+>     sudo apt install ssh
+>     sudo apt install pdsh
 
 3. Setup passphrase for ssh
 
->ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa
->cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
-> chmod 0600 ~/.ssh/authorized_keys
+>     ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa
+>     cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
+>     chmod 0600 ~/.ssh/authorized_keys
 // ensure the file ~/.ssh/authorized_keys exists
 
 // check whether you can ssh to localhost
-> ssh localhost
-> logout
+>     ssh localhost
+>     logout
 // or exit
 
 Configure rcmd to ssh as default
 
-> sudo nano /etc/pdsh/rcmd_default
+>     sudo nano /etc/pdsh/rcmd_default
 
 // add “ssh” to the file
 >
@@ -122,23 +122,25 @@ Configure rcmd to ssh as default
     ssh
 // Ctrl X -> Y -> Enter to exit
 
-// or: > sudo echo “ssh” > /etc/pdsh/rcmd_default
+// or: 
+>     sudo echo “ssh” > /etc/pdsh/rcmd_default
 
 4. Download Hadoop 3.2.1 
 
-> cd Desktop
-> wget https://archive.apache.org/dist/hadoop/common/hadoop-3.2.1/hadoop-3.2.1.tar.gz
+>     cd Desktop
+>     wget https://archive.apache.org/dist/hadoop/common/hadoop-3.2.1/hadoop-3.2.1.tar.gz
 
-> tar -xvf hadoop-3.2.1.tar.gz
+// Unzip:
+>     tar -xvf hadoop-3.2.1.tar.gz
 
 5. Declare JAVA_HOME for Hadoop
 
 // cd to the extracted folder of Hadoop
-> cd Desktop/hadoop-3.2.1
-> nano etc/hadoop/hadoop-env.sh
+>     cd Desktop/hadoop-3.2.1
+>     nano etc/hadoop/hadoop-env.sh
 
 // add this line to the end of the file
-// check your own Java path if different (ARM64 NOT AMD64)
+// ARM64 NOT AMD64
 >
 >
     export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-arm64
@@ -148,14 +150,13 @@ Configure rcmd to ssh as default
 // Ctrl X -> Y -> Enter to exit
 
 # Verify installation
-// cd to the extracted folder of Hadoop
-> bin/hadoop
+>     bin/hadoop
 
 # Set up Pseudo-Distributed Mode
 Configuration
 Edit these following files
 
-> sudo nano etc/hadoop/core-site.xml
+>     sudo nano etc/hadoop/core-site.xml
 >
      <configuration>
         <property>
@@ -164,7 +165,7 @@ Edit these following files
         </property>
      </configuration>
 
-> sudo nano etc/hadoop/hdfs-site.xml
+>     sudo nano etc/hadoop/hdfs-site.xml
 >
      <configuration>
         <property>
@@ -174,11 +175,11 @@ Edit these following files
      </configuration>
 
 # Format the filesystem
-> bin/hdfs namenode -format
+>     bin/hdfs namenode -format
 
 # Start HDFS
-> cd Desktop/hadoop-3.2.1
-> sbin/start-dfs.sh
+>     cd Desktop/hadoop-3.2.1
+>     sbin/start-dfs.sh
 
 > jps
 \\ 12345 NameNode
@@ -188,30 +189,30 @@ Edit these following files
 http://localhost:9870/
 
 # Run a MapReduce job locally
-> bin/hdfs dfs -mkdir /user
-> bin/hdfs dfs -mkdir /user/$(whoami)
+>     bin/hdfs dfs -mkdir /user
+>     bin/hdfs dfs -mkdir /user/$(whoami)
 
 Copy input to HDFS
-> bin/hdfs dfs -mkdir input
-> bin/hdfs dfs -put etc/hadoop/*.xml /user/$(whoami)/input
+>     bin/hdfs dfs -mkdir input
+>     bin/hdfs dfs -put etc/hadoop/*.xml /user/$(whoami)/input
 
-> bin/hdfs dfs -ls /user/$(whoami)/input
+>     bin/hdfs dfs -ls /user/$(whoami)/input
 
 # Run a MapReduce Job
-> ls share/hadoop/mapreduce/
-> bin/hadoop jar share/hadoop/mapreduce/hadoop-mapreduce-examples-3.2.1.jar grep /user/$(whoami)/input /user/$(whoami)/output 'dfs[a-z.]+'
+>     ls share/hadoop/mapreduce/
+>     bin/hadoop jar share/hadoop/mapreduce/hadoop-mapreduce-examples-3.2.1.jar grep /user/$(whoami)/input /user/$(whoami)/output 'dfs[a-z.]+'
 
 Check the result
-> bin/hdfs dfs -ls /user/$(whoami)/output
+>     bin/hdfs dfs -ls /user/$(whoami)/output
 or
-> bin/hdfs dfs -get /user/$(whoami)/output output
-> cat output/*
+>     bin/hdfs dfs -get /user/$(whoami)/output output
+>     cat output/*
 or
-> bin/hdfs dfs -cat /user/$(whoami)/output/*
+>     bin/hdfs dfs -cat /user/$(whoami)/output/*
 
 # Yarn
-> cd Desktop/hadoop-3.2.1
-> sudo nano etc/hadoop/mapred-site.xml
+>     cd Desktop/hadoop-3.2.1
+>     sudo nano etc/hadoop/mapred-site.xml
 > 
      <configuration>
         <property>
@@ -226,7 +227,7 @@ or
 
 // Ctrl + X -> Y -> Enter
 
-> sudo nano etc/hadoop/yarn-site.xml
+>     sudo nano etc/hadoop/yarn-site.xml
 > 
     <configuration>
         <property>
@@ -242,26 +243,26 @@ or
 
 // Ctrl + X -> Y -> Enter
 
-> sbin/start-yarn.sh
+>     sbin/start-yarn.sh
 
-> jps
+>     jps
 
 // 45678 ResourceManager
 // 56789 NodeManager
 
 # Run Run a MapReduce Job on Yarn
-> bin/hadoop jar share/hadoop/mapreduce/hadoop-mapreduce-examples-3.2.1.jar grep /user/$(whoami)/input /user/$(whoami)/output 'dfs[a-z.]+'
+>     bin/hadoop jar share/hadoop/mapreduce/hadoop-mapreduce-examples-3.2.1.jar grep /user/$(whoami)/input /user/$(whoami)/output 'dfs[a-z.]+'
 
 Check the result
-> bin/hdfs dfs -ls /user/$(whoami)/output
+>     bin/hdfs dfs -ls /user/$(whoami)/output
 or
-> bin/hdfs dfs -get /user/$(whoami)/output output
-> cat output/*
+>     bin/hdfs dfs -get /user/$(whoami)/output output
+>     cat output/*
 
 # STOP YARN AND HDFS (before using "sudo poweroff")
-> sbin/stop-yarn.sh
-> sbin/stop-dfs.sh
-> sudo poweroff
+>     sbin/stop-yarn.sh
+>     sbin/stop-dfs.sh
+>     sudo poweroff
 
 
 
