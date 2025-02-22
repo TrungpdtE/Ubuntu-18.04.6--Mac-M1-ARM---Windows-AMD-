@@ -136,9 +136,9 @@ Configure rcmd to ssh as default
 
 // add this line to the end of the file
 // check your own Java path if different
-export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-amd64
-export PATH=${JAVA_HOME}/bin:${PATH}
-export HADOOP_CLASSPATH=${JAVA_HOME}/lib/tools.jar
+> export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-amd64
+> export PATH=${JAVA_HOME}/bin:${PATH}
+> export HADOOP_CLASSPATH=${JAVA_HOME}/lib/tools.jar
 // Ctrl X -> Y -> Enter to exit
 
 # Verify installation
@@ -207,31 +207,31 @@ or
 > cd Desktop/hadoop-3.2.1
 > sudo nano etc/hadoop/mapred-site.xml
 
-<configuration>
-    <property>
-        <name>mapreduce.framework.name</name>
-        <value>yarn</value>
-    </property>
-    <property>
-        <name>mapreduce.application.classpath</name>
-        <value>$HADOOP_MAPRED_HOME/share/hadoop/mapreduce/*:$HADOOP_MAPRED_HOME/share/hadoop/mapreduce/lib/*</value>
-    </property>
-</configuration>
+> <configuration>
+>    <property>
+>        <name>mapreduce.framework.name</name>
+>        <value>yarn</value>
+>    </property>
+>    <property>
+>        <name>mapreduce.application.classpath</name>
+>        <value>$HADOOP_MAPRED_HOME/share/hadoop/mapreduce/*:$HADOOP_MAPRED_HOME/share/hadoop/mapreduce/lib/*</value>
+>    </property>
+> </configuration>
 
 > Ctrl + X -> Y -> Enter
 
 > sudo nano etc/hadoop/yarn-site.xml
 
-<configuration>
-    <property>
-        <name>yarn.nodemanager.aux-services</name>
-        <value>mapreduce_shuffle</value>
-    </property>
-    <property>
-        <name>yarn.nodemanager.env-whitelist</name>
-        <value>JAVA_HOME,HADOOP_COMMON_HOME,HADOOP_HDFS_HOME,HADOOP_CONF_DIR,CLASSPATH_PREPEND_DISTCACHE,HADOOP_YARN_HOME,HADOOP_MAPRED_HOME</value>
-    </property>
-</configuration>
+> <configuration>
+>    <property>
+>        <name>yarn.nodemanager.aux-services</name>
+>        <value>mapreduce_shuffle</value>
+>    </property>
+>    <property>
+>        <name>yarn.nodemanager.env-whitelist</name>
+>        <value>JAVA_HOME,HADOOP_COMMON_HOME,HADOOP_HDFS_HOME,HADOOP_CONF_DIR,CLASSPATH_PREPEND_DISTCACHE,HADOOP_YARN_HOME,HADOOP_MAPRED_HOME</value>
+>    </property>
+> </configuration>
 
 
 > Ctrl + X -> Y -> Enter
