@@ -135,9 +135,11 @@ Configure rcmd to ssh as default
 > nano etc/hadoop/hadoop-env.sh
 
 // add this line to the end of the file
-// check your own Java path if different
-> export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-amd64
+// check your own Java path if different (ARM64 NOT AMD64)
+> export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-arm64
+
 > export PATH=${JAVA_HOME}/bin:${PATH}
+
 > export HADOOP_CLASSPATH=${JAVA_HOME}/lib/tools.jar
 // Ctrl X -> Y -> Enter to exit
 
