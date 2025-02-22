@@ -105,19 +105,21 @@ if ssh is not enabled
 >ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa
 >cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
 > chmod 0600 ~/.ssh/authorized_keys
-# ensure the file ~/.ssh/authorized_keys exists
+// ensure the file ~/.ssh/authorized_keys exists
 
-# check whether you can ssh to localhost
+// check whether you can ssh to localhost
 > ssh localhost
-> logout # or exit
+> logout
+// or exit
 
 Configure rcmd to ssh as default
 
 > sudo nano /etc/pdsh/rcmd_default
-# add “ssh” to the file
-# Ctrl X -> Y -> Enter to exit
 
-# or: > sudo echo “ssh” > /etc/pdsh/rcmd_default
+// add “ssh” to the file
+// Ctrl X -> Y -> Enter to exit
+
+// or: > sudo echo “ssh” > /etc/pdsh/rcmd_default
 
 4. Download Hadoop 3.2.1 
 
@@ -128,22 +130,22 @@ Configure rcmd to ssh as default
 
 5. Declare JAVA_HOME for Hadoop
 
-# cd to the extracted folder of Hadoop
+// cd to the extracted folder of Hadoop
 > cd Desktop/hadoop-3.2.1
 > nano etc/hadoop/hadoop-env.sh
 
-# add this line to the end of the file
-# check your own Java path if different
+// add this line to the end of the file
+// check your own Java path if different
 export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-amd64
 export PATH=${JAVA_HOME}/bin:${PATH}
 export HADOOP_CLASSPATH=${JAVA_HOME}/lib/tools.jar
-# Ctrl X -> Y -> Enter to exit
+// Ctrl X -> Y -> Enter to exit
 
-Verify installation
-# cd to the extracted folder of Hadoop
+# Verify installation
+// cd to the extracted folder of Hadoop
 > bin/hadoop
 
-# Set up Pseudo-Distributed Mode
+// Set up Pseudo-Distributed Mode
 Configuration
 Edit these following files
 
