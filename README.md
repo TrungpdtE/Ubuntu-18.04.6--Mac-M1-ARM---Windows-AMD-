@@ -88,3 +88,178 @@ test SSH:
 if ssh is not enabled
 -> sudo systemctl restart ssh
 
+# Set up Hadoop
+
+1. Install Java 8 (highly recommended)
+
+> sudo apt install openjdk-8-jre-headless
+> sudo apt install openjdk-8-jdk-headless
+
+2. Install ssh and pdsh
+
+> sudo apt install ssh
+> sudo apt install pdsh
+
+3. Setup passphrase for ssh
+
+>ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa
+>cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
+> chmod 0600 ~/.ssh/authorized_keys
+# ensure the file ~/.ssh/authorized_keys exists
+
+# check whether you can ssh to localhost
+> ssh localhost
+> logout # or exit
+
+Configure rcmd to ssh as default
+
+> sudo nano /etc/pdsh/rcmd_default
+# add “ssh” to the file
+# Ctrl X -> Y -> Enter to exit
+
+# or: > sudo echo “ssh” > /etc/pdsh/rcmd_default
+
+4. Download Hadoop 3.2.1 
+
+> cd Desktop
+> wget https://archive.apache.org/dist/hadoop/common/hadoop-3.2.1/hadoop-3.2.1.tar.gz
+
+> tar -xvf hadoop-3.2.1.tar.gz
+
+5. Declare JAVA_HOME for Hadoop
+
+# cd to the extracted folder of Hadoop
+> cd Desktop/hadoop-3.2.1
+> nano etc/hadoop/hadoop-env.sh
+
+# add this line to the end of the file
+# check your own Java path if different
+export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-amd64
+export PATH=${JAVA_HOME}/bin:${PATH}
+export HADOOP_CLASSPATH=${JAVA_HOME}/lib/tools.jar
+# Ctrl X -> Y -> Enter to exit
+
+Verify installation
+# cd to the extracted folder of Hadoop
+> bin/hadoop
+
+# Set up Pseudo-Distributed Mode
+Configuration
+Edit these following files
+
+> sudo nano etc/hadoop/core-site.xml
+
+<configuration>
+    <property>
+        <name>fs.defaultFS</name>
+        <value>hdfs://localhost:9000</value>
+    </property>
+</configuration>
+
+> sudo nano etc/hadoop/hdfs-site.xml
+
+<configuration>
+    <property>
+        <name>dfs.replication</name>
+        <value>1</value>
+    </property>
+</configuration>
+
+# Format the filesystem
+> bin/hdfs namenode -format
+
+# Start HDFS
+> cd Desktop/hadoop-3.2.1
+> sbin/start-dfs.sh
+
+> jps
+\\ 12345 NameNode
+\\ 23456 DataNode
+\\ 34567 SecondaryNameNode
+
+http://localhost:9870/
+
+# Run a MapReduce job locally
+> bin/hdfs dfs -mkdir /user
+> bin/hdfs dfs -mkdir /user/$(whoami)
+
+Copy input to HDFS
+> bin/hdfs dfs -mkdir input
+> bin/hdfs dfs -put etc/hadoop/*.xml /user/$(whoami)/input
+
+> bin/hdfs dfs -ls /user/$(whoami)/input
+
+# Run a MapReduce Job
+> ls share/hadoop/mapreduce/
+> bin/hadoop jar share/hadoop/mapreduce/hadoop-mapreduce-examples-3.2.1.jar grep /user/$(whoami)/input /user/$(whoami)/output 'dfs[a-z.]+'
+
+Check the result
+> bin/hdfs dfs -ls /user/$(whoami)/output
+or
+> bin/hdfs dfs -get /user/$(whoami)/output output
+> cat output/*
+or
+> bin/hdfs dfs -cat /user/$(whoami)/output/*
+
+# Yarn
+> cd Desktop/hadoop-3.2.1
+> sudo nano etc/hadoop/mapred-site.xml
+
+<configuration>
+    <property>
+        <name>mapreduce.framework.name</name>
+        <value>yarn</value>
+    </property>
+    <property>
+        <name>mapreduce.application.classpath</name>
+        <value>$HADOOP_MAPRED_HOME/share/hadoop/mapreduce/*:$HADOOP_MAPRED_HOME/share/hadoop/mapreduce/lib/*</value>
+    </property>
+</configuration>
+
+> Ctrl + X -> Y -> Enter
+
+> sudo nano etc/hadoop/yarn-site.xml
+
+<configuration>
+    <property>
+        <name>yarn.nodemanager.aux-services</name>
+        <value>mapreduce_shuffle</value>
+    </property>
+    <property>
+        <name>yarn.nodemanager.env-whitelist</name>
+        <value>JAVA_HOME,HADOOP_COMMON_HOME,HADOOP_HDFS_HOME,HADOOP_CONF_DIR,CLASSPATH_PREPEND_DISTCACHE,HADOOP_YARN_HOME,HADOOP_MAPRED_HOME</value>
+    </property>
+</configuration>
+
+
+> Ctrl + X -> Y -> Enter
+
+> sbin/start-yarn.sh
+
+> jps
+
+// 45678 ResourceManager
+// 56789 NodeManager
+
+# Run Run a MapReduce Job on Yarn
+> bin/hadoop jar share/hadoop/mapreduce/hadoop-mapreduce-examples-3.2.1.jar grep /user/$(whoami)/input /user/$(whoami)/output 'dfs[a-z.]+'
+
+Check the result
+> bin/hdfs dfs -ls /user/$(whoami)/output
+or
+> bin/hdfs dfs -get /user/$(whoami)/output output
+> cat output/*
+
+# STOP YARN AND HDFS (before using "sudo poweroff")
+> sbin/stop-yarn.sh
+> sbin/stop-dfs.sh
+> sudo poweroff
+
+
+
+
+
+
+
+
+
