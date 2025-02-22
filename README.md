@@ -117,6 +117,9 @@ Configure rcmd to ssh as default
 > sudo nano /etc/pdsh/rcmd_default
 
 // add “ssh” to the file
+>
+>
+    ssh
 // Ctrl X -> Y -> Enter to exit
 
 // or: > sudo echo “ssh” > /etc/pdsh/rcmd_default
@@ -136,11 +139,12 @@ Configure rcmd to ssh as default
 
 // add this line to the end of the file
 // check your own Java path if different (ARM64 NOT AMD64)
-> export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-arm64
+>
+>
+    export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-arm64
+    export PATH=${JAVA_HOME}/bin:${PATH}=
+    export HADOOP_CLASSPATH=${JAVA_HOME}/lib/tools.jar
 
-> export PATH=${JAVA_HOME}/bin:${PATH}
-
-> export HADOOP_CLASSPATH=${JAVA_HOME}/lib/tools.jar
 // Ctrl X -> Y -> Enter to exit
 
 # Verify installation
@@ -152,22 +156,22 @@ Configuration
 Edit these following files
 
 > sudo nano etc/hadoop/core-site.xml
-
-> <configuration>
->    <property>
->        <name>fs.defaultFS</name>
->        <value>hdfs://localhost:9000</value>
->    </property>
-> </configuration>
+>
+     <configuration>
+        <property>
+            <name>fs.defaultFS</name>
+            <value>hdfs://localhost:9000</value>
+        </property>
+     </configuration>
 
 > sudo nano etc/hadoop/hdfs-site.xml
-
-> <configuration>
->    <property>
->        <name>dfs.replication</name>
->        <value>1</value>
->    </property>
-> </configuration>
+>
+     <configuration>
+        <property>
+            <name>dfs.replication</name>
+            <value>1</value>
+        </property>
+     </configuration>
 
 # Format the filesystem
 > bin/hdfs namenode -format
@@ -208,44 +212,35 @@ or
 # Yarn
 > cd Desktop/hadoop-3.2.1
 > sudo nano etc/hadoop/mapred-site.xml
+> 
+     <configuration>
+        <property>
+            <name>mapreduce.framework.name</name> 
+            <value>yarn</value>
+        </property>
+        <property>
+            <name>mapreduce.application.classpath</name> 
+            <value>$HADOOP_MAPRED_HOME/share/hadoop/mapreduce/*:$HADOOP_MAPRED_HOME/share/hadoop/mapreduce/lib/*</value>
+        </property>
+     </configuration>
 
-> <configuration>
-  
->    <property>
-  
->        <name>mapreduce.framework.name</name>
-  
->        <value>yarn</value>
-
->    </property>
-
->    <property>
-
->        <name>mapreduce.application.classpath</name>
-  
->        <value>$HADOOP_MAPRED_HOME/share/hadoop/mapreduce/*:$HADOOP_MAPRED_HOME/share/hadoop/mapreduce/lib/*</value>
-
->    </property>
-
-> </configuration>
-
-> Ctrl + X -> Y -> Enter
+// Ctrl + X -> Y -> Enter
 
 > sudo nano etc/hadoop/yarn-site.xml
+> 
+    <configuration>
+        <property>
+            <name>yarn.nodemanager.aux-services</name>
+           <value>mapreduce_shuffle</value>
+        </property>
+        <property>
+            <name>yarn.nodemanager.env-whitelist</name>
+            <value>JAVA_HOME,HADOOP_COMMON_HOME,HADOOP_HDFS_HOME,HADOOP_CONF_DIR,CLASSPATH_PREPEND_DISTCACHE,HADOOP_YARN_HOME,HADOOP_MAPRED_HOME</value>
+        </property>
+    </configuration>
 
-><configuration>
-    <property>
-        <name>yarn.nodemanager.aux-services</name>
-       <value>mapreduce_shuffle</value>
-    </property>
-    <property>
-        <name>yarn.nodemanager.env-whitelist</name>
-        <value>JAVA_HOME,HADOOP_COMMON_HOME,HADOOP_HDFS_HOME,HADOOP_CONF_DIR,CLASSPATH_PREPEND_DISTCACHE,HADOOP_YARN_HOME,HADOOP_MAPRED_HOME</value>
-    </property>
-  </configuration>
 
-
-> Ctrl + X -> Y -> Enter
+// Ctrl + X -> Y -> Enter
 
 > sbin/start-yarn.sh
 
