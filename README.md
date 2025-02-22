@@ -19,8 +19,11 @@ Try again:
 4. Open Parallels desktop
 step1. Click install another OS from a DVD or image file
 # click "Customie Settings before Installation" 
+
 <img width="871" alt="Ảnh màn hình 2025-02-21 lúc 00 14 55" src="https://github.com/user-attachments/assets/3171cc27-ef47-4a39-aafb-adc8e762bd9e" />
+
 Set up your CPU & Memory 
+
 <img width="871" alt="Ảnh màn hình 2025-02-21 lúc 00 15 14" src="https://github.com/user-attachments/assets/d9d35fdf-9fbd-4323-aea9-3f93b1630e8a" />
 
 step2. Link the USB to Ubuntu
