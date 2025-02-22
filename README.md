@@ -145,27 +145,27 @@ Configure rcmd to ssh as default
 // cd to the extracted folder of Hadoop
 > bin/hadoop
 
-// Set up Pseudo-Distributed Mode
+# Set up Pseudo-Distributed Mode
 Configuration
 Edit these following files
 
 > sudo nano etc/hadoop/core-site.xml
 
-<configuration>
-    <property>
-        <name>fs.defaultFS</name>
-        <value>hdfs://localhost:9000</value>
-    </property>
-</configuration>
+> <configuration>
+>    <property>
+>        <name>fs.defaultFS</name>
+>        <value>hdfs://localhost:9000</value>
+>    </property>
+> </configuration>
 
 > sudo nano etc/hadoop/hdfs-site.xml
 
-<configuration>
-    <property>
-        <name>dfs.replication</name>
-        <value>1</value>
-    </property>
-</configuration>
+> <configuration>
+>    <property>
+>        <name>dfs.replication</name>
+>        <value>1</value>
+>    </property>
+> </configuration>
 
 # Format the filesystem
 > bin/hdfs namenode -format
