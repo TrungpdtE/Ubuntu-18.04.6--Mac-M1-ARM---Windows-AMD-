@@ -1,5 +1,5 @@
 # Windows
-1. Install VMware pro (thuốc)
+1. Install VMware pro
 https://drive.google.com/drive/folders/1itlyo1isVBKIhEMlg8eBN0jpDJ1vNdcg?usp=sharing
 
 5A2NR-A3K5J-4J928-1L97M-8YU18 | 5Z448-0Z10M-MJ8V8-1V2ZK-9Z2PA
