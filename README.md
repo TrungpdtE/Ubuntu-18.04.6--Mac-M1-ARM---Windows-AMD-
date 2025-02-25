@@ -22,6 +22,8 @@ Use BalenaEtcher to create a bootable USB by flashing the Ubuntu 18.04 AMD ISO f
 Open VMware Workstation.
 Link the USB drive containing the Ubuntu ISO to VMware.
 Follow the on-screen instructions to proceed with the Ubuntu installation.
+
+
 // Note: The process is similar to the steps for installing Ubuntu on Mac using Parallels (refer to the section below for details).
 
 # Ubuntu-18.04.6-Mac-M1
