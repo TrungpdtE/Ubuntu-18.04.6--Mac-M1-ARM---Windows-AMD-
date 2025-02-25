@@ -1,5 +1,6 @@
 # Windows
 1. Install VMware pro
+   
 https://drive.google.com/drive/folders/1itlyo1isVBKIhEMlg8eBN0jpDJ1vNdcg?usp=sharing
 
 5A2NR-A3K5J-4J928-1L97M-8YU18 | 5Z448-0Z10M-MJ8V8-1V2ZK-9Z2PA
@@ -11,10 +12,13 @@ HG4NR-AC30L-MJ8M0-1L8NP-0YAND | 0G2XA-08LE2-HJET9-0T3N6-9CA7D
 4G4MK-6EK93-0J188-0JAE4-8FH46
 
 2. Install balenaEtcher
+
 https://etcher.balena.io/
+
 Use BalenaEtcher to create a bootable USB by flashing the Ubuntu 18.04 AMD ISO file onto the USB drive.
 
- 3. Configure VMware for Ubuntu Installation
+ 4. Configure VMware for Ubuntu Installation
+
 Open VMware Workstation.
 Link the USB drive containing the Ubuntu ISO to VMware.
 Follow the on-screen instructions to proceed with the Ubuntu installation.
